@@ -1,0 +1,20 @@
+extends ./layout.pug
+block content
+    h1 USER
+
+    form(action="/users/search",method="GET")
+        .d-flex
+            input(type="text",placeholder="nhập user cần tìm",name="q" value = value ? value : "")
+            button.btn.btn-outline-primary Search
+    table.table 
+        tr
+            th Tên
+        each t of title
+            tr
+            td #{t}
+    
+
+
+    a(href="../") back
+
+
