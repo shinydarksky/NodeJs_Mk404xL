@@ -1,8 +1,8 @@
 const express = require('express')
+const create = require('../Controllers/create.controller')
 const router = express.Router()
 var db = require('../db')
-
-
+const e = require('express')
 // router.get('/',(req,res)=>res.render("../Views/index.pug",{}))
 router.get('/',(req,res)=>{
     res.render("../Views/users.pug",{
@@ -19,21 +19,8 @@ router.get('/search',(req,res)=>{
     title:liusers,value: temp//{name:temp}
     })
 })
-router.get('/create',(req,res)=>res.render("../Views/create.pug"))
-router.post('/create',(req,res)=>{
-    var errors = []
-    if(!req.body.name){
-        errors.push('Name errors is required.')
-    }
-    if(errors.length != 0){
-        res.render('../Views/create.pug',{errors:errors,value:req.body})
-        return
-    }
-    db.get('users').push(req.body.name).write()
-    console.log(req.body.name)
-
-    res.redirect('/')
-})
+router.get('/create',create.get)
+router.post('/create',create.post)
 
 
 
